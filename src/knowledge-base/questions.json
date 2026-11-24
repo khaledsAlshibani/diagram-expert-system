@@ -1,0 +1,387 @@
+[
+  {
+    "id": "goal",
+    "prompt": "What do you want to model?",
+    "when": {},
+    "options": [
+      {
+        "value": "process",
+        "label": "Processes and workflows"
+      },
+      {
+        "value": "interaction",
+        "label": "Interactions and user requirements"
+      },
+      {
+        "value": "behavior",
+        "label": "Behavior, states, and decisions"
+      },
+      {
+        "value": "structure",
+        "label": "Data and software structure"
+      },
+      {
+        "value": "architecture",
+        "label": "System architecture and infrastructure"
+      },
+      {
+        "value": "planning",
+        "label": "Planning, projects, and ideas"
+      }
+    ]
+  },
+  {
+    "id": "processFocus",
+    "prompt": "What do you want to show about the process?",
+    "when": {
+      "goal": "process"
+    },
+    "options": [
+      {
+        "value": "control-flow",
+        "label": "Steps, decisions, and execution order"
+      },
+      {
+        "value": "responsibility",
+        "label": "Who does what in the process"
+      }
+    ]
+  },
+  {
+    "id": "controlFlowDetail",
+    "prompt": "What kind of workflow are you modeling?",
+    "when": {
+      "focus": "control-flow"
+    },
+    "options": [
+      {
+        "value": "algorithm",
+        "label": "An algorithm or simple procedure with decisions"
+      },
+      {
+        "value": "parallel",
+        "label": "A software workflow with parallel or synchronized tasks"
+      },
+      {
+        "value": "business",
+        "label": "A formal business process with events and messages"
+      }
+    ]
+  },
+  {
+    "id": "responsibilityDetail",
+    "prompt": "What do you want to show about the participants?",
+    "when": {
+      "focus": "responsibility"
+    },
+    "options": [
+      {
+        "value": "ownership",
+        "label": "Who performs each step"
+      },
+      {
+        "value": "collaboration",
+        "label": "How participants in different organizations exchange messages"
+      },
+      {
+        "value": "capabilities",
+        "label": "What each actor can do in the system"
+      }
+    ]
+  },
+  {
+    "id": "interactionFocus",
+    "prompt": "Which part of the interaction do you want to show?",
+    "when": {
+      "goal": "interaction"
+    },
+    "options": [
+      {
+        "value": "messages",
+        "label": "Messages between participants"
+      },
+      {
+        "value": "users",
+        "label": "How users interact with the system"
+      }
+    ]
+  },
+  {
+    "id": "messagesDetail",
+    "prompt": "What matters most about the messages?",
+    "when": {
+      "focus": "messages"
+    },
+    "options": [
+      {
+        "value": "order",
+        "label": "The order of the messages"
+      },
+      {
+        "value": "links",
+        "label": "Which objects are linked and where messages go"
+      },
+      {
+        "value": "time",
+        "label": "Exact durations and timing constraints"
+      }
+    ]
+  },
+  {
+    "id": "usersDetail",
+    "prompt": "What do you want to show about users and the system?",
+    "when": {
+      "focus": "users"
+    },
+    "options": [
+      {
+        "value": "functions",
+        "label": "What each actor can do in the system"
+      },
+      {
+        "value": "navigation",
+        "label": "How users move between pages or screens"
+      },
+      {
+        "value": "boundary",
+        "label": "The system boundary, its users, and external systems"
+      }
+    ]
+  },
+  {
+    "id": "behaviorFocus",
+    "prompt": "What kind of behavior do you want to describe?",
+    "when": {
+      "goal": "behavior"
+    },
+    "options": [
+      {
+        "value": "lifecycle",
+        "label": "The lifecycle of an entity or system"
+      },
+      {
+        "value": "decisions",
+        "label": "How rules and conditions guide decisions"
+      }
+    ]
+  },
+  {
+    "id": "lifecycleDetail",
+    "prompt": "What matters most about the lifecycle?",
+    "when": {
+      "focus": "lifecycle"
+    },
+    "options": [
+      {
+        "value": "states",
+        "label": "States and the events that trigger transitions"
+      },
+      {
+        "value": "durations",
+        "label": "When states change and how long they last"
+      },
+      {
+        "value": "activities",
+        "label": "The flow of actions and branches"
+      }
+    ]
+  },
+  {
+    "id": "decisionsDetail",
+    "prompt": "How do conditions affect what happens next?",
+    "when": {
+      "focus": "decisions"
+    },
+    "options": [
+      {
+        "value": "hierarchy",
+        "label": "A hierarchy of conditions and outcomes"
+      },
+      {
+        "value": "procedure",
+        "label": "Decisions determine the next step in a procedure"
+      },
+      {
+        "value": "events",
+        "label": "Events and conditions trigger state changes"
+      }
+    ]
+  },
+  {
+    "id": "structureFocus",
+    "prompt": "What kind of structure are you modeling?",
+    "when": {
+      "goal": "structure"
+    },
+    "options": [
+      {
+        "value": "data",
+        "label": "How data is organized or moves"
+      },
+      {
+        "value": "objects",
+        "label": "Software classes, objects, and packages"
+      }
+    ]
+  },
+  {
+    "id": "dataDetail",
+    "prompt": "What do you need to show about the data?",
+    "when": {
+      "focus": "data"
+    },
+    "options": [
+      {
+        "value": "database",
+        "label": "Database entities, attributes, and relationships"
+      },
+      {
+        "value": "movement",
+        "label": "Data moving between processes, stores, and external entities"
+      },
+      {
+        "value": "hierarchy",
+        "label": "Nested data, such as a document structure"
+      }
+    ]
+  },
+  {
+    "id": "objectsDetail",
+    "prompt": "Which part of the software structure matters most?",
+    "when": {
+      "focus": "objects"
+    },
+    "options": [
+      {
+        "value": "types",
+        "label": "Classes, attributes, methods, and relationships"
+      },
+      {
+        "value": "instances",
+        "label": "Specific objects and their links at one point in time"
+      },
+      {
+        "value": "packages",
+        "label": "Groups of related code and their dependencies"
+      }
+    ]
+  },
+  {
+    "id": "architectureFocus",
+    "prompt": "Which part of the architecture are you describing?",
+    "when": {
+      "goal": "architecture"
+    },
+    "options": [
+      {
+        "value": "software",
+        "label": "How the software is organized"
+      },
+      {
+        "value": "infrastructure",
+        "label": "Where the software runs and how it communicates"
+      }
+    ]
+  },
+  {
+    "id": "softwareDetail",
+    "prompt": "How much of the software structure do you want to show?",
+    "when": {
+      "focus": "software"
+    },
+    "options": [
+      {
+        "value": "context",
+        "label": "The whole system, its users, and external systems"
+      },
+      {
+        "value": "containers",
+        "label": "Applications, services, and data stores inside the system"
+      },
+      {
+        "value": "modules",
+        "label": "Internal modules, components, and their interfaces"
+      }
+    ]
+  },
+  {
+    "id": "infrastructureDetail",
+    "prompt": "What do you need to show about the runtime environment?",
+    "when": {
+      "focus": "infrastructure"
+    },
+    "options": [
+      {
+        "value": "hosting",
+        "label": "Hosts and the software they run"
+      },
+      {
+        "value": "network",
+        "label": "How network devices are connected and arranged"
+      },
+      {
+        "value": "requests",
+        "label": "The order of requests between running services"
+      }
+    ]
+  },
+  {
+    "id": "planningFocus",
+    "prompt": "What are you planning or organizing?",
+    "when": {
+      "goal": "planning"
+    },
+    "options": [
+      {
+        "value": "project",
+        "label": "A project and its tasks"
+      },
+      {
+        "value": "ideas",
+        "label": "Ideas, concepts, and organizational relationships"
+      }
+    ]
+  },
+  {
+    "id": "projectDetail",
+    "prompt": "What do you need to show about the project?",
+    "when": {
+      "focus": "project"
+    },
+    "options": [
+      {
+        "value": "schedule",
+        "label": "Task start and end dates on a calendar"
+      },
+      {
+        "value": "dependencies",
+        "label": "Task dependencies and possible paths through the project"
+      },
+      {
+        "value": "scope",
+        "label": "How the project breaks down into deliverables"
+      }
+    ]
+  },
+  {
+    "id": "ideasDetail",
+    "prompt": "What kind of relationships do you want to show?",
+    "when": {
+      "focus": "ideas"
+    },
+    "options": [
+      {
+        "value": "brainstorm",
+        "label": "Ideas branching from a central topic"
+      },
+      {
+        "value": "concepts",
+        "label": "Concepts linked by labels that explain their relationships"
+      },
+      {
+        "value": "reporting",
+        "label": "Teams and who reports to whom"
+      }
+    ]
+  }
+]

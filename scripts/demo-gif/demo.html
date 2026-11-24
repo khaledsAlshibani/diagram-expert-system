@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  :root {
+    --bg: #f8f8f9; --surface: #fff; --muted: #f4f4f5; --border: #e4e4e7; --border-strong: #d4d4d8;
+    --fg: #18181b; --fg-muted: #5f6066; --fg-subtle: #8a8b91; --brand: #2563eb; --brand-soft: #eff4ff; --brand-line: #c7d7fe;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --ease: cubic-bezier(0.2, 0, 0, 1);
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px; line-height: 20px; color: var(--fg); -webkit-font-smoothing: antialiased;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; width: 1280px; height: 800px; background: var(--bg); overflow: hidden; }
+  .stage { display: grid; grid-template-columns: 680px 1fr; grid-template-rows: minmax(0, 1fr) 64px; gap: 16px 24px; padding: 28px; height: 100%; }
+  .story { grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; padding: 0 20px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 16px; }
+  .story-icon { display: grid; place-items: center; flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--brand-soft); color: var(--brand); }
+  .story-icon svg { width: 16px; height: 16px; }
+  .story p { margin: 0; font-size: 15px; line-height: 22px; color: var(--fg); animation: enter .45s var(--ease) both; }
+  .story p em { font-style: normal; color: var(--brand); }
+  .story p code { font: 500 13px var(--mono); color: var(--brand); }
+  .frame { border: 1px solid var(--border-strong); border-radius: 16px; overflow: hidden; background: var(--bg); }
+  .frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+  .panel { background: var(--surface); border: 1px solid var(--border-strong); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
+  .panel-head h2 { margin: 0; font-size: 16px; line-height: 22px; font-weight: 500; letter-spacing: -0.01em; }
+  .panel-head p { margin: 2px 0 0; font-size: 12px; line-height: 16px; color: var(--fg-subtle); }
+
+  /* The three phases of one inference cycle. */
+  .loop { display: grid; grid-template-columns: 1fr 14px 1fr 14px 1fr; align-items: center; gap: 6px; }
+  .phase { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--border); font-size: 12px; line-height: 14px; color: var(--fg-muted);
+           transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease); }
+  .phase b { display: grid; place-items: center; flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--muted); font-size: 11px; font-weight: 500; transition: inherit; }
+  .phase.active { background: var(--brand-soft); border-color: var(--brand-line); color: var(--brand); }
+  .phase.active b { background: var(--brand); color: #fff; }
+  .loop > svg { width: 14px; height: 14px; color: var(--fg-subtle); }
+  .loop-note { grid-column: 1 / -1; display: flex; align-items: center; gap: 6px; font-size: 11.5px; line-height: 16px; color: var(--fg-subtle); }
+  .loop-note svg { width: 13px; height: 13px; }
+
+  .section-title { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+  .section-title span:first-child { font-size: 12px; line-height: 16px; font-weight: 500; }
+  .section-title .hint { font-size: 11.5px; color: var(--fg-subtle); font-variant-numeric: tabular-nums; }
+
+  .memory { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .memory .empty { height: 30px; display: flex; align-items: center; padding: 0 12px; border-radius: 8px; border: 1px dashed var(--border-strong); color: var(--fg-subtle); font-size: 12px; }
+  .fact { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 28px; padding: 0 5px 0 12px; border-radius: 8px; background: var(--muted); border: 1px solid transparent;
+          transition: background 1s var(--ease), border-color 1s var(--ease); animation: enter .45s var(--ease) both; }
+  .fact.is-new { background: var(--brand-soft); border-color: var(--brand-line); }
+  .fact code { font: 500 12px/1 var(--mono); }
+  .tag { font-size: 11px; line-height: 18px; padding: 0 7px; border-radius: 5px; white-space: nowrap; background: var(--surface); color: var(--fg-muted); border: 1px solid var(--border); }
+  .tag.inferred { color: var(--brand); border-color: var(--brand-line); }
+
+  .cycles { display: flex; flex-direction: column; gap: 6px; }
+  .cycle { border: 1px solid var(--border); border-radius: 10px; padding: 9px 12px; animation: enter .45s var(--ease) both; }
+  .cycle-head { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--fg-muted); }
+  .cycle-head .num { font-size: 11px; color: var(--fg-subtle); width: 46px; flex: none; }
+  .cycle-head .rule-id { font: 600 12px/1 var(--mono); color: var(--fg); }
+  .scan { height: 3px; border-radius: 3px; background: var(--muted); margin-top: 8px; overflow: hidden; }
+  .scan i { display: block; height: 100%; background: var(--brand); transform-origin: left; transform: scaleX(0); transition: transform .7s var(--ease); }
+  .scan.done i { transform: scaleX(1); }
+
+  .rule { margin-top: 8px; border-radius: 8px; background: var(--muted); padding: 8px 10px; font: 12px/22px var(--mono); animation: enter .4s var(--ease) both; }
+  .rule-row { display: flex; align-items: center; gap: 8px; }
+  .kw { width: 38px; flex: none; color: var(--fg-subtle); font-size: 10.5px; }
+  .cond { flex: 1; color: var(--fg-muted); transition: color .3s; }
+  .cond.ok { color: var(--fg); }
+  .state { font: 11px/18px Inter, system-ui, sans-serif; color: var(--brand); display: flex; align-items: center; gap: 4px; opacity: 0; transform: scale(.85); transition: opacity .3s var(--ease), transform .3s var(--ease); }
+  .state svg { width: 13px; height: 13px; }
+  .cond.ok + .state { opacity: 1; transform: none; }
+  .then { flex: 1; color: var(--brand); font-weight: 600; opacity: 0; transform: translateX(-6px); transition: opacity .35s var(--ease), transform .35s var(--ease); }
+  .then.show, .then.show + .state { opacity: 1; transform: none; }
+  .explain { margin-top: 8px; font-size: 12px; line-height: 17px; color: var(--fg-muted); animation: enter .4s var(--ease) both; }
+  .explain code { font: 500 11.5px var(--mono); color: var(--fg); }
+
+  .status { margin-top: auto; display: flex; gap: 10px; padding: 11px 14px; border-radius: 10px; background: var(--muted); transition: background .5s var(--ease), color .5s var(--ease); }
+  .status svg { width: 16px; height: 16px; flex: none; margin-top: 2px; }
+  .status .copy { animation: enter .35s var(--ease) both; }
+  .status .title { font-size: 13px; line-height: 20px; font-weight: 500; }
+  .status .detail { font-size: 12px; line-height: 16px; color: var(--fg-muted); transition: color .5s; }
+  .status code { font: 500 11.5px var(--mono); }
+  .status.done { background: var(--brand); color: #fff; }
+  .status.done .detail { color: rgba(255,255,255,.82); }
+
+  .cursor { position: absolute; z-index: 10; left: 0; top: 0; width: 22px; height: 22px; pointer-events: none; transition: transform .9s var(--ease); transform: translate(520px, 620px); }
+  .cursor svg { width: 22px; height: 22px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); }
+  .ripple { position: absolute; z-index: 9; width: 36px; height: 36px; margin: -16px 0 0 -16px; border-radius: 50%; background: rgba(37,99,235,.28); pointer-events: none; animation: ripple .55s var(--ease) forwards; }
+  @keyframes ripple { from { transform: scale(.2); opacity: 1; } to { transform: scale(1.4); opacity: 0; } }
+  @keyframes enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="frame"><iframe id="app" src="index.html"></iframe></div>
+
+  <div class="panel">
+    <header class="panel-head">
+      <h2>Inference engine</h2>
+      <p>Forward chaining over 48 IF-THEN rules</p>
+    </header>
+
+    <div class="loop">
+      <div class="phase" id="phase-facts"><b>1</b>Add facts</div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      <div class="phase" id="phase-match"><b>2</b>Match rules</div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      <div class="phase" id="phase-fire"><b>3</b>Fire rule</div>
+      <div class="loop-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+        Repeat until a cycle adds no new fact
+      </div>
+    </div>
+
+    <section>
+      <div class="section-title"><span>Working memory</span><span class="hint" id="count">What the system knows</span></div>
+      <ol class="memory" id="memory"><li class="empty">No facts yet, so no rule can match</li></ol>
+    </section>
+
+    <section>
+      <div class="section-title"><span>Cycles</span><span class="hint" id="cycle-hint">Waiting for an answer</span></div>
+      <div class="cycles" id="cycles"><div class="memory"><div class="empty">Each answer starts a new round of cycles</div></div></div>
+    </section>
+
+    <div class="status" id="status"></div>
+  </div>
+
+  <div class="story">
+    <span class="story-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+    <p id="story"></p>
+  </div>
+</div>
+<div class="cursor" id="cursor"><svg viewBox="0 0 24 24"><path d="M4 2.5v17.2l4.6-4.4 2.9 6.6 2.7-1.2-2.9-6.5H18L4 2.5z" fill="#18181b" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const el = (tag, cls, html) => { const node = document.createElement(tag); if (cls) node.className = cls; if (html != null) node.innerHTML = html; return node; };
+const ICON = {
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>',
+  question: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>',
+  done: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>',
+};
+
+function setPhase(name) {
+  for (const phase of ['facts', 'match', 'fire']) $(`phase-${phase}`).classList.toggle('active', phase === name);
+}
+
+let factCount = 0;
+function addFact(fact, tag, inferred) {
+  $('memory').querySelector('.empty')?.remove();
+  const row = el('li', 'fact is-new', `<code>${fact}</code><span class="tag${inferred ? ' inferred' : ''}">${tag}</span>`);
+  $('memory').append(row);
+  factCount++;
+  $('count').textContent = `${factCount} fact${factCount === 1 ? '' : 's'}`;
+  setTimeout(() => row.classList.remove('is-new'), 1400);
+}
+
+function setStatus({ title, detail, done }) {
+  const status = $('status');
+  status.classList.toggle('done', Boolean(done));
+  status.innerHTML = `${done ? ICON.done : ICON.question}<div class="copy"><div class="title">${title}</div><div class="detail">${detail}</div></div>`;
+}
+
+async function runCycle(number, rule) {
+  setPhase('match');
+  const box = el('div', 'cycle');
+  const head = el('div', 'cycle-head', `<span class="num">Cycle ${number}</span><span class="text">Checking all 48 rules</span>`);
+  const scan = el('div', 'scan', '<i></i>');
+  box.append(head, scan);
+  $('cycles').append(box);
+  await wait(60);
+  scan.classList.add('done');
+  await wait(800);
+  scan.remove();
+  const text = head.querySelector('.text');
+
+  if (!rule) {
+    text.textContent = 'No rule adds a new fact, so inference stops';
+    setPhase(null);
+    return;
+  }
+
+  text.innerHTML = `<span class="rule-id">${rule.id}</span> matches`;
+  const card = el('div', 'rule');
+  const conditions = rule.when.map((condition, index) => {
+    card.append(el('div', 'rule-row', `<span class="kw">${index ? 'AND' : 'IF'}</span><span class="cond">${condition}</span><span class="state">${ICON.check}in memory</span>`));
+    return card.lastChild.querySelector('.cond');
+  });
+  card.append(el('div', 'rule-row', `<span class="kw">THEN</span><span class="then">${rule.then}</span><span class="state">${ICON.plus}new fact</span>`));
+  box.append(card);
+  for (const condition of conditions) { await wait(380); condition.classList.add('ok'); }
+  await wait(380);
+  setPhase('fire');
+  card.querySelector('.then').classList.add('show');
+  box.append(el('div', 'explain', `All conditions are known facts, so ${rule.id} fires.`));
+  await wait(450);
+  addFact(rule.then, `inferred by ${rule.id}`, true);
+  await wait(900);
+}
+
+function say(text) {
+  const line = el('p', '', text);
+  line.id = 'story';
+  $('story').replaceWith(line);
+}
+
+window.demo = {
+  say,
+  intro() {
+    say('Memory starts empty. The first question has no condition, so the system asks it right away.');
+    setStatus({ title: 'Next question: goal', detail: 'Asked first because it has no condition' });
+  },
+  async answer(fact, next, rule) {
+    if (next.before) say(next.before);
+    $('cycles').replaceChildren();
+    $('cycle-hint').textContent = 'One pass over the rules each';
+    setPhase('facts');
+    addFact(fact, 'answer');
+    await wait(700);
+    if (rule) { await runCycle(1, rule); await runCycle(2); } else { await runCycle(1); }
+    await wait(300);
+    setStatus(next);
+    if (next.after) say(next.after);
+  },
+  moveCursor(x, y) { $('cursor').style.transform = `translate(${x}px, ${y}px)`; },
+  click(x, y) { const ripple = el('div', 'ripple'); ripple.style.left = `${x}px`; ripple.style.top = `${y}px`; document.body.append(ripple); setTimeout(() => ripple.remove(), 600); },
+};
+</script>
+</body>
+</html>

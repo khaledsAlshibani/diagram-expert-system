@@ -1,0 +1,578 @@
+[
+  {
+    "id": "R01",
+    "when": {
+      "goal": "process",
+      "processFocus": "control-flow"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "control-flow"
+    },
+    "explanation": "The focus is the order of steps and decisions in the process."
+  },
+  {
+    "id": "R02",
+    "when": {
+      "focus": "control-flow",
+      "controlFlowDetail": "algorithm"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "flowchart"
+    },
+    "explanation": "A flowchart shows which step comes next and where decisions branch."
+  },
+  {
+    "id": "R03",
+    "when": {
+      "focus": "control-flow",
+      "controlFlowDetail": "parallel"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "activity"
+    },
+    "explanation": "A UML activity diagram shows where parallel paths split and join."
+  },
+  {
+    "id": "R04",
+    "when": {
+      "focus": "control-flow",
+      "controlFlowDetail": "business"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "bpmn"
+    },
+    "explanation": "BPMN uses events, activities, gateways, and messages to describe a formal business process."
+  },
+  {
+    "id": "R05",
+    "when": {
+      "goal": "process",
+      "processFocus": "responsibility"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "responsibility"
+    },
+    "explanation": "The focus is what each participant does in the process."
+  },
+  {
+    "id": "R06",
+    "when": {
+      "focus": "responsibility",
+      "responsibilityDetail": "ownership"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "swimlane"
+    },
+    "explanation": "A swimlane diagram groups steps by owner so you can see responsibilities and handoffs."
+  },
+  {
+    "id": "R07",
+    "when": {
+      "focus": "responsibility",
+      "responsibilityDetail": "collaboration"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "bpmn"
+    },
+    "explanation": "BPMN uses pools for separate participants and message flows for what they exchange."
+  },
+  {
+    "id": "R08",
+    "when": {
+      "focus": "responsibility",
+      "responsibilityDetail": "capabilities"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "use-case"
+    },
+    "explanation": "A use case diagram shows the system functions available to each actor."
+  },
+  {
+    "id": "R09",
+    "when": {
+      "goal": "interaction",
+      "interactionFocus": "messages"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "messages"
+    },
+    "explanation": "The focus is the messages participants exchange."
+  },
+  {
+    "id": "R10",
+    "when": {
+      "focus": "messages",
+      "messagesDetail": "order"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "sequence"
+    },
+    "explanation": "A sequence diagram arranges messages in time order along participant lifelines."
+  },
+  {
+    "id": "R11",
+    "when": {
+      "focus": "messages",
+      "messagesDetail": "links"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "communication"
+    },
+    "explanation": "A communication diagram shows the links between objects and the messages that follow those links."
+  },
+  {
+    "id": "R12",
+    "when": {
+      "focus": "messages",
+      "messagesDetail": "time"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "timing"
+    },
+    "explanation": "A UML timing diagram places changes and interactions on a time axis."
+  },
+  {
+    "id": "R13",
+    "when": {
+      "goal": "interaction",
+      "interactionFocus": "users"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "users"
+    },
+    "explanation": "The focus is how users interact with the system."
+  },
+  {
+    "id": "R14",
+    "when": {
+      "focus": "users",
+      "usersDetail": "functions"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "use-case"
+    },
+    "explanation": "A use case diagram connects each actor to the goals they can achieve through the system."
+  },
+  {
+    "id": "R15",
+    "when": {
+      "focus": "users",
+      "usersDetail": "navigation"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "user-flow"
+    },
+    "explanation": "A user flow diagram shows the screens users visit and the choices they make along the way."
+  },
+  {
+    "id": "R16",
+    "when": {
+      "focus": "users",
+      "usersDetail": "boundary"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "system-context"
+    },
+    "explanation": "A system context diagram shows what sits outside the system and how it connects."
+  },
+  {
+    "id": "R17",
+    "when": {
+      "goal": "behavior",
+      "behaviorFocus": "lifecycle"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "lifecycle"
+    },
+    "explanation": "The focus is how an entity or system behaves over its lifecycle."
+  },
+  {
+    "id": "R18",
+    "when": {
+      "focus": "lifecycle",
+      "lifecycleDetail": "states"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "state"
+    },
+    "explanation": "A state machine diagram shows the states an entity can occupy and the events that trigger transitions."
+  },
+  {
+    "id": "R19",
+    "when": {
+      "focus": "lifecycle",
+      "lifecycleDetail": "durations"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "timing"
+    },
+    "explanation": "A timing diagram shows when states change and how long each state lasts."
+  },
+  {
+    "id": "R20",
+    "when": {
+      "focus": "lifecycle",
+      "lifecycleDetail": "activities"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "activity"
+    },
+    "explanation": "An activity diagram shows how actions proceed and where the flow branches."
+  },
+  {
+    "id": "R21",
+    "when": {
+      "goal": "behavior",
+      "behaviorFocus": "decisions"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "decisions"
+    },
+    "explanation": "The focus is how conditions determine what happens next."
+  },
+  {
+    "id": "R22",
+    "when": {
+      "focus": "decisions",
+      "decisionsDetail": "hierarchy"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "decision-tree"
+    },
+    "explanation": "A decision tree branches at each test, leading to another test or an outcome."
+  },
+  {
+    "id": "R23",
+    "when": {
+      "focus": "decisions",
+      "decisionsDetail": "procedure"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "flowchart"
+    },
+    "explanation": "A flowchart shows how a decision changes the next step in a procedure."
+  },
+  {
+    "id": "R24",
+    "when": {
+      "focus": "decisions",
+      "decisionsDetail": "events"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "state"
+    },
+    "explanation": "A state machine diagram shows the events that trigger transitions and the conditions that allow them."
+  },
+  {
+    "id": "R25",
+    "when": {
+      "goal": "structure",
+      "structureFocus": "data"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "data"
+    },
+    "explanation": "The focus is how data is organized or how it moves."
+  },
+  {
+    "id": "R26",
+    "when": {
+      "focus": "data",
+      "dataDetail": "database"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "er"
+    },
+    "explanation": "An entity-relationship diagram shows database entities, their attributes, and their relationships."
+  },
+  {
+    "id": "R27",
+    "when": {
+      "focus": "data",
+      "dataDetail": "movement"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "dfd"
+    },
+    "explanation": "A data flow diagram traces where data comes from, how processes transform it, and where it goes."
+  },
+  {
+    "id": "R28",
+    "when": {
+      "focus": "data",
+      "dataDetail": "hierarchy"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "tree"
+    },
+    "explanation": "A tree diagram shows how each parent branches into its children."
+  },
+  {
+    "id": "R29",
+    "when": {
+      "goal": "structure",
+      "structureFocus": "objects"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "objects"
+    },
+    "explanation": "The focus is how software classes, objects, or packages are organized."
+  },
+  {
+    "id": "R30",
+    "when": {
+      "focus": "objects",
+      "objectsDetail": "types"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "class"
+    },
+    "explanation": "A class diagram shows software types, their attributes and operations, and their relationships."
+  },
+  {
+    "id": "R31",
+    "when": {
+      "focus": "objects",
+      "objectsDetail": "instances"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "object"
+    },
+    "explanation": "An object diagram shows which instances exist and how they are linked at a particular moment."
+  },
+  {
+    "id": "R32",
+    "when": {
+      "focus": "objects",
+      "objectsDetail": "packages"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "package"
+    },
+    "explanation": "A package diagram groups related model elements and shows which packages depend on others."
+  },
+  {
+    "id": "R33",
+    "when": {
+      "goal": "architecture",
+      "architectureFocus": "software"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "software"
+    },
+    "explanation": "The focus is how the software is organized and where its boundaries lie."
+  },
+  {
+    "id": "R34",
+    "when": {
+      "focus": "software",
+      "softwareDetail": "context"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "system-context"
+    },
+    "explanation": "A C4 system context diagram shows the system alongside its users and external systems."
+  },
+  {
+    "id": "R35",
+    "when": {
+      "focus": "software",
+      "softwareDetail": "containers"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "container"
+    },
+    "explanation": "A C4 container diagram shows how applications, services, and data stores interact within a system."
+  },
+  {
+    "id": "R36",
+    "when": {
+      "focus": "software",
+      "softwareDetail": "modules"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "component"
+    },
+    "explanation": "A component diagram shows the major software components and the interfaces or dependencies that connect them."
+  },
+  {
+    "id": "R37",
+    "when": {
+      "goal": "architecture",
+      "architectureFocus": "infrastructure"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "infrastructure"
+    },
+    "explanation": "The focus is where software runs and how its runtime elements connect."
+  },
+  {
+    "id": "R38",
+    "when": {
+      "focus": "infrastructure",
+      "infrastructureDetail": "hosting"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "deployment"
+    },
+    "explanation": "A deployment diagram shows which runtime nodes host each software artifact."
+  },
+  {
+    "id": "R39",
+    "when": {
+      "focus": "infrastructure",
+      "infrastructureDetail": "network"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "network"
+    },
+    "explanation": "A network topology diagram shows how devices and links are arranged across a network."
+  },
+  {
+    "id": "R40",
+    "when": {
+      "focus": "infrastructure",
+      "infrastructureDetail": "requests"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "sequence"
+    },
+    "explanation": "A sequence diagram shows the order in which running services send requests and responses."
+  },
+  {
+    "id": "R41",
+    "when": {
+      "goal": "planning",
+      "planningFocus": "project"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "project"
+    },
+    "explanation": "The focus is planning the work needed to deliver a project."
+  },
+  {
+    "id": "R42",
+    "when": {
+      "focus": "project",
+      "projectDetail": "schedule"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "gantt"
+    },
+    "explanation": "A Gantt chart places tasks on a timeline so you can compare their start and end dates."
+  },
+  {
+    "id": "R43",
+    "when": {
+      "focus": "project",
+      "projectDetail": "dependencies"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "pert"
+    },
+    "explanation": "A PERT network shows task dependencies and helps identify the critical path."
+  },
+  {
+    "id": "R44",
+    "when": {
+      "focus": "project",
+      "projectDetail": "scope"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "wbs"
+    },
+    "explanation": "A work breakdown structure divides the project into smaller deliverables and work packages."
+  },
+  {
+    "id": "R45",
+    "when": {
+      "goal": "planning",
+      "planningFocus": "ideas"
+    },
+    "then": {
+      "fact": "focus",
+      "value": "ideas"
+    },
+    "explanation": "The focus is how ideas, concepts, or teams relate to one another."
+  },
+  {
+    "id": "R46",
+    "when": {
+      "focus": "ideas",
+      "ideasDetail": "brainstorm"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "mind-map"
+    },
+    "explanation": "A mind map branches outward from a central topic to group related ideas."
+  },
+  {
+    "id": "R47",
+    "when": {
+      "focus": "ideas",
+      "ideasDetail": "concepts"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "concept-map"
+    },
+    "explanation": "A concept map labels each link to explain how two concepts relate."
+  },
+  {
+    "id": "R48",
+    "when": {
+      "focus": "ideas",
+      "ideasDetail": "reporting"
+    },
+    "then": {
+      "fact": "recommendation",
+      "value": "org-chart"
+    },
+    "explanation": "An organizational chart shows who reports to whom."
+  }
+]

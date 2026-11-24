@@ -1,0 +1,254 @@
+{
+  "flowchart": {
+    "name": "Flowchart",
+    "description": "Shows the order of steps and decisions in a process.",
+    "example": "The steps and decisions in a login check.",
+    "related": [
+      "activity",
+      "decision-tree"
+    ]
+  },
+  "activity": {
+    "name": "UML Activity Diagram",
+    "description": "Shows activities, decision branches, and tasks that run in parallel.",
+    "example": "An order workflow that checks payment and stock in parallel.",
+    "related": [
+      "sequence",
+      "state"
+    ]
+  },
+  "bpmn": {
+    "name": "BPMN Diagram",
+    "description": "Uses standard symbols to show business activities, events, decisions, and messages.",
+    "example": "A purchase approval process across two departments.",
+    "related": [
+      "swimlane",
+      "use-case"
+    ]
+  },
+  "swimlane": {
+    "name": "Swimlane Diagram",
+    "description": "Groups process steps into lanes by person, role, or team.",
+    "example": "A support workflow with lanes for the customer, agent, and manager.",
+    "related": [
+      "bpmn",
+      "flowchart"
+    ]
+  },
+  "use-case": {
+    "name": "UML Use Case Diagram",
+    "description": "Shows how users and other actors achieve goals through a system.",
+    "example": "Customers place orders and administrators manage products.",
+    "related": [
+      "sequence",
+      "activity"
+    ]
+  },
+  "sequence": {
+    "name": "UML Sequence Diagram",
+    "description": "Shows the order of messages exchanged between participants.",
+    "example": "A browser sends a request to an API, which queries a database.",
+    "related": [
+      "class",
+      "communication"
+    ]
+  },
+  "communication": {
+    "name": "UML Communication Diagram",
+    "description": "Shows how objects are linked and numbers the messages they exchange.",
+    "example": "The links and messages between objects during checkout.",
+    "related": [
+      "sequence",
+      "object"
+    ]
+  },
+  "timing": {
+    "name": "UML Timing Diagram",
+    "description": "Shows when states or values change and how long they last.",
+    "example": "A device becomes active and returns to idle after a timeout.",
+    "related": [
+      "sequence",
+      "state"
+    ]
+  },
+  "user-flow": {
+    "name": "User Flow Diagram",
+    "description": "Shows the paths and choices users encounter in an interface.",
+    "example": "A shopper moves from a product listing to checkout.",
+    "related": [
+      "use-case",
+      "flowchart"
+    ]
+  },
+  "system-context": {
+    "name": "C4 System Context Diagram",
+    "description": "Shows how a system connects to its users and external systems.",
+    "example": "An online store connects to customers and a payment provider.",
+    "related": [
+      "container",
+      "use-case"
+    ]
+  },
+  "state": {
+    "name": "UML State Machine Diagram",
+    "description": "Shows the states an entity can be in and what triggers transitions.",
+    "example": "An order moves from pending to paid, then to shipped, or it is canceled.",
+    "related": [
+      "activity",
+      "sequence"
+    ]
+  },
+  "decision-tree": {
+    "name": "Decision Tree",
+    "description": "Uses branches to show how each decision leads to an outcome.",
+    "example": "Choosing a support action based on answers to diagnostic questions.",
+    "related": [
+      "flowchart",
+      "state"
+    ]
+  },
+  "er": {
+    "name": "Entity-Relationship Diagram (ERD)",
+    "description": "Shows data entities, their attributes, and how they relate.",
+    "example": "The relationships among customers, orders, and products in a database.",
+    "related": [
+      "class",
+      "dfd"
+    ]
+  },
+  "dfd": {
+    "name": "Data Flow Diagram (DFD)",
+    "description": "Shows how data moves between processes, stores, and external entities.",
+    "example": "A customer submits order details for processing and storage.",
+    "related": [
+      "er",
+      "system-context"
+    ]
+  },
+  "tree": {
+    "name": "Tree Diagram",
+    "description": "Shows how elements are nested through parent-child relationships.",
+    "example": "Product categories and their subcategories.",
+    "related": [
+      "er",
+      "class"
+    ]
+  },
+  "class": {
+    "name": "UML Class Diagram",
+    "description": "Shows software classes, their attributes and operations, and how they relate.",
+    "example": "Product, Cart, and Order classes in a shopping application.",
+    "related": [
+      "sequence",
+      "object"
+    ]
+  },
+  "object": {
+    "name": "UML Object Diagram",
+    "description": "Shows specific objects and their links at one point in time.",
+    "example": "A customer object linked to its current shopping cart.",
+    "related": [
+      "class",
+      "communication"
+    ]
+  },
+  "package": {
+    "name": "UML Package Diagram",
+    "description": "Groups related model elements into packages and shows their dependencies.",
+    "example": "Dependencies among authentication, catalog, and order packages.",
+    "related": [
+      "component",
+      "class"
+    ]
+  },
+  "container": {
+    "name": "C4 Container Diagram",
+    "description": "Shows the main applications and data stores within a system and how they communicate.",
+    "example": "A web client, REST API, and PostgreSQL database.",
+    "related": [
+      "system-context",
+      "component"
+    ]
+  },
+  "component": {
+    "name": "UML Component Diagram",
+    "description": "Shows software components, their interfaces, and their dependencies.",
+    "example": "Components for authentication, billing, and inventory.",
+    "related": [
+      "container",
+      "deployment"
+    ]
+  },
+  "deployment": {
+    "name": "UML Deployment Diagram",
+    "description": "Shows which machines or runtime environments host software artifacts.",
+    "example": "An application server connected to a database host.",
+    "related": [
+      "component",
+      "network"
+    ]
+  },
+  "network": {
+    "name": "Network Topology Diagram",
+    "description": "Shows how network devices are arranged and connected.",
+    "example": "Computers, switches, and a router in a local network.",
+    "related": [
+      "deployment",
+      "container"
+    ]
+  },
+  "gantt": {
+    "name": "Gantt Chart",
+    "description": "Shows when tasks start and finish as bars on a timeline.",
+    "example": "The schedule for design, development, and testing.",
+    "related": [
+      "wbs",
+      "pert"
+    ]
+  },
+  "pert": {
+    "name": "PERT Network Diagram",
+    "description": "Shows the paths through a project and which tasks depend on others.",
+    "example": "How implementation and testing affect the release date.",
+    "related": [
+      "gantt",
+      "wbs"
+    ]
+  },
+  "wbs": {
+    "name": "Work Breakdown Structure (WBS)",
+    "description": "Breaks project scope into a hierarchy of deliverables and work packages.",
+    "example": "An application project broken into UI, backend, and documentation deliverables.",
+    "related": [
+      "gantt",
+      "org-chart"
+    ]
+  },
+  "mind-map": {
+    "name": "Mind Map",
+    "description": "Arranges related ideas in branches around a central topic.",
+    "example": "Brainstorming features for a diagram editor.",
+    "related": [
+      "concept-map",
+      "wbs"
+    ]
+  },
+  "concept-map": {
+    "name": "Concept Map",
+    "description": "Uses labeled links to explain how concepts relate to one another.",
+    "example": "How knowledge bases, rules, and inference engines relate.",
+    "related": [
+      "mind-map",
+      "class"
+    ]
+  },
+  "org-chart": {
+    "name": "Organizational Chart",
+    "description": "Shows positions, teams, and who reports to whom.",
+    "example": "A development team reports to a project manager.",
+    "related": [
+      "swimlane",
+      "wbs"
+    ]
+  }
+}
