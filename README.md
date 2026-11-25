@@ -1,12 +1,10 @@
-# Diagram Expert System
+<h1 align="center">Diagram Expert System</h1>
 
-Assignment 1 for Principles of Artificial Intelligence Course.
+<p align="center">
+A rule-based expert system developed as Assignment 1 for the Principles of Artificial Intelligence course. It asks three questions about what you want to model and recommends the diagram that fits best, with the rules that led to the result, an example and related diagrams. The questionnaire and its forward-chaining inference engine are written in TypeScript and run entirely in the browser.
+</p>
 
-Answer three questions to find a diagram for what you want to model. The result explains the recommendation, shows an example, and lists related diagrams.
-
-The TypeScript questionnaire and its rule-based inference engine run entirely in the browser.
-
-![A consultation on the left, with working memory and the rules that fire on the right](docs/demo.gif)
+https://github.com/user-attachments/assets/6836e27e-57c9-468d-a2f7-9edca8027705
 
 ## Getting started
 
